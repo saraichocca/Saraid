@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Profesional | Saraid Chocca</title>
+    <link rel="icon" href="imagenes/sarai.jfif">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+                        /* Animaciones y transiciones elegantes */
+                        .cta-btn, .unit-tab, .week-link, .project-card, .stack-card, .profile-img-square {
+                            transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s, border 0.18s;
+                        }
+                        .cta-btn:active, .unit-tab:active, .week-link:active {
+                            transform: scale(0.97);
+                            box-shadow: 0 2px 8px #e0e7ff44;
+                        }
+                        .project-card, .stack-card {
+                            opacity: 0;
+                            transform: translateY(40px);
+                            animation: cardFadeIn 0.9s cubic-bezier(.6,0,.4,1) forwards;
+                        }
+                        .project-card.visible, .stack-card.visible {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                        @keyframes cardFadeIn {
+                            from { opacity: 0; transform: translateY(40px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                        .unit-tab-link .unit-tab {
+                            box-shadow: 0 2px 12px rgba(167,139,250,0.10);
+                        }
+                        .unit-tab-link .unit-tab:active {
+                            box-shadow: 0 1px 4px #e0e7ff44;
+                        }
+                        .profile-img-square {
+                            transition: transform 0.18s, box-shadow 0.18s;
+                        }
+                        .profile-img-square:hover {
+                            transform: scale(1.04) rotate(-1deg);
+                            box-shadow: 0 8px 32px rgba(124,58,237,0.18);
+                        }
+                /* --- PERSONALIZACIÓN DE PESTAÑAS DE UNIDADES Y SEMANAS --- */
+                .units-tabs {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1.2rem;
+                    margin-bottom: 1.2rem;
+                }
+                .unit-tab {
+                    background: linear-gradient(90deg, var(--primary) 70%, var(--accent) 100%);
+                    color: #fff;
+                    border: none;
+                    border-radius: 1.5rem 1.5rem 0 0;
+                    padding: 0.8rem 2.2rem 0.6rem 2.2rem;
+                    font-size: 1.13rem;
+                    font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+                    font-weight: 600;
+                    box-shadow: 0 2px 12px rgba(167,139,250,0.10);
+                    cursor: pointer;
+                    outline: none;
+                    transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.13s;
+                    margin-bottom: -2px;
+                    border-bottom: 2.5px solid transparent;
+                }
+                .unit-tab.active, .unit-tab:hover {
+                    background: linear-gradient(90deg, var(--accent) 70%, var(--primary) 100%);
+                    color: var(--primary);
+                    box-shadow: 0 8px 32px rgba(124,58,237,0.13);
+                    border-bottom: 2.5px solid var(--primary);
+                    transform: scale(1.04);
+                }
+                .weeks-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.7rem;
+                    justify-content: center;
+                    margin: 1.2rem 0 1.5rem 0;
+                }
+                .week-link.week-btn {
+                    background: var(--glass);
+                    color: var(--primary);
+                    border: 1.5px solid var(--pastel-lavender);
+                    border-radius: 1.2rem;
+                    padding: 0.6rem 1.3rem;
+                    font-size: 1.05rem;
+                    font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+                    font-weight: 500;
+                    text-decoration: none;
+                    box-shadow: 0 2px 10px rgba(167,139,250,0.07);
+                    transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.13s;
+                    cursor: pointer;
+                    outline: none;
+                    position: relative;
+                }
+                .week-link.week-btn.active, .week-link.week-btn:hover {
+                    background: linear-gradient(90deg, var(--primary) 70%, var(--accent) 100%);
+                    color: #fff;
+                    box-shadow: 0 8px 24px rgba(249,168,212,0.13);
+                    border-color: var(--accent);
+                    transform: scale(1.06);
+                }
+                @media (max-width: 600px) {
+                    .unit-tab { font-size: 0.98rem; padding: 0.6rem 1.1rem 0.5rem 1.1rem; }
+                    .weeks-list { gap: 0.3rem; }
+                    .week-link.week-btn { padding: 0.5rem 0.7rem; font-size: 0.98rem; }
+                }
+        /* --- CSS INTEGRADO (PASTEL, MINIMAL, ELEGANTE, RESPONSIVO) --- */
+        :root {
+            --primary: #a78bfa;
+            --secondary: #fce7f3;
+            --accent: #f9a8d4;
+            --bg: #f8fafc;
+            --text: #232946;
+            --card: #fff;
+            --shadow: 0 6px 32px 0 rgba(167,139,250,0.10);
+            --glass: rgba(255,255,255,0.75);
+            --glass-blur: blur(18px);
+            --pastel-blue: #bae6fd;
+            --pastel-green: #bbf7d0;
+            --pastel-yellow: #fef9c3;
+            --pastel-lavender: #e0e7ff;
+            --pastel-pink: #fce7f3;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, var(--bg) 60%, var(--pastel-pink) 100%);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            letter-spacing: 0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        .main-header {
+            background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+            color: var(--text);
+            padding: 1.1rem 0 0.5rem 0;
+            box-shadow: var(--shadow);
+            border-bottom-left-radius: 2.5rem;
+            border-bottom-right-radius: 2.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            min-height: 80px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2.5px solid var(--pastel-lavender);
+            animation: headerFadeIn 1.2s cubic-bezier(.6,0,.4,1);
+        }
+        @keyframes headerFadeIn {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header-content {
+            max-width: 950px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 0 1.2rem;
+        }
+        .big-unit-card {
+            min-width: 320px;
+            min-height: 210px;
+            padding: 2.7rem 2.2rem 2.3rem 2.2rem;
+            font-size: 1.35rem;
+            border-radius: 2.5rem;
+            background: linear-gradient(135deg, #f3e8ff 60%, #fce7f3 100%);
+            box-shadow: 0 12px 48px 0 rgba(167,139,250,0.18), 0 2px 16px 0 rgba(249,168,212,0.10);
+            border: 3.5px solid #e0e7ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            transition: background 0.22s, box-shadow 0.22s, transform 0.18s, border-color 0.18s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .big-unit-card::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: -40px;
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, #a78bfa33 60%, transparent 100%);
+            z-index: 0;
+        }
+        .big-unit-card span {
+            z-index: 1;
+        }
+        .big-unit-card:hover {
+            background: linear-gradient(120deg, #a78bfa 60%, #f9a8d4 100%);
+            color: #fff;
+            border-color: #f9a8d4;
+            box-shadow: 0 20px 60px 0 rgba(249,168,212,0.22);
+            transform: scale(1.07) rotate(-1deg);
+        }
+        .big-unit-card .unit-label {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            margin-bottom: 0.3rem;
+        }
+        .big-unit-card .unit-range {
+            font-size: 1.18rem;
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 900px) {
+            .big-unit-card {
+                min-width: 200px;
+                min-height: 120px;
+                font-size: 1.08rem;
+                padding: 1.3rem 0.7rem 1.1rem 0.7rem;
+            }
+        }
+            padding: 0.2rem 0.7rem;
+        }
+        .main-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .main-nav .nav-btn {
+            color: var(--primary);
+            font-weight: 700;
+            padding: 0.7rem 1.6rem;
+            border-radius: 2rem;
+            font-size: 1.18rem;
+            background: linear-gradient(90deg, #f3e8ff 70%, #fce7f3 100%);
+            box-shadow: 0 2px 12px #e0e7ff44;
+            margin: 0 0.2rem;
+            border: 2px solid #e0e7ff;
+            transition: background 0.22s, color 0.22s, box-shadow 0.18s, transform 0.18s, border-color 0.18s;
+            position: relative;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            outline: none;
+            border-style: solid;
+        }
+        .main-nav .nav-btn.active, .main-nav .nav-btn:hover, .main-nav .nav-btn:focus {
+            background: linear-gradient(90deg, #a78bfa 60%, #f9a8d4 100%);
+            color: #fff;
+            border-color: #f9a8d4;
+            box-shadow: 0 8px 32px rgba(249,168,212,0.18);
+            transform: scale(1.09) rotate(-1deg);
+            z-index: 1;
+        }
+        main {
+            max-width: 950px;
+            margin: 2.5rem auto 2rem auto;
+            padding: 2.2rem 1.5rem;
+            background: var(--glass);
+            border-radius: 2.2rem;
+            box-shadow: 0 8px 40px 0 rgba(167,139,250,0.10), 0 1.5px 8px 0 rgba(167,139,250,0.07);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1.5px solid var(--pastel-lavender);
+            transition: box-shadow 0.2s;
+            animation: fadein 1.2s cubic-bezier(.6,0,.4,1);
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section {
+            margin-bottom: 2.5rem;
+            background: var(--glass);
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 12px rgba(167,139,250,0.06);
+            padding: 1.5rem 1.2rem 1.7rem 1.2rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--pastel-lavender);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(.6,0,.4,1), transform 0.7s cubic-bezier(.6,0,.4,1);
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+            font-weight: 700;
+        }
+        /* --- AVATAR & INFO --- */
+        .personal-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .personal-info .info {
+            flex: 1 1 250px;
+        }
+        .personal-info .avatar {
+            flex: 0 0 140px;
+            width: 140px;
+            height: 140px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 24px rgba(124,58,237,0.10);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            position: relative;
+        }
+        .avatar-square {
+            border-radius: 18px !important;
+            background: linear-gradient(135deg, #f3e8ff 60%, #fbbf24 100%);
+            box-shadow: 0 6px 32px rgba(124,58,237,0.13);
+            border: 3px solid var(--primary);
+        }
+        .profile-img-square {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(124,58,237,0.10);
+            border: none;
+            display: block;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .profile-img-square:hover {
+            transform: scale(1.04) rotate(-1deg);
+            box-shadow: 0 8px 32px rgba(124,58,237,0.18);
+        }
+        /* --- TARJETAS Y COMPONENTES --- */
+        .project-card {
+            border-radius: 1.3rem;
+            padding: 1.3rem 1.1rem;
+            box-shadow: 0 4px 18px rgba(186,230,253,0.13);
+            border: 1.5px solid var(--pastel-lavender);
+            transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: cardFadeIn 0.9s cubic-bezier(.6,0,.4,1) forwards;
+        }
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.07) rotate(-1deg);
+            box-shadow: 0 20px 48px rgba(186,230,253,0.18);
+            border-color: var(--accent);
+            filter: brightness(1.04) saturate(1.1);
+            /* Colores únicos para cada proyecto */
+            .project-card.project1 { background: linear-gradient(135deg, #bae6fd 80%, #f3e8ff 100%); }
+            .project-card.project2 { background: linear-gradient(135deg, #fce7f3 80%, #f9a8d4 100%); }
+            .project-card.project3 { background: linear-gradient(135deg, #fef9c3 80%, #bbf7d0 100%); }
+        }
+        .notebook {
+            background: var(--pastel-green);
+            border-left: 5px solid var(--primary);
+            padding: 1.1rem 1.3rem;
+            border-radius: 1.1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(187,247,208,0.10);
+            border: 1px solid var(--pastel-lavender);
+        }
+        .reflection {
+            background: linear-gradient(90deg, var(--pastel-yellow) 80%, var(--accent) 100%);
+            border-left: 5px solid var(--accent);
+            padding: 1.1rem 1.3rem;
+            border-radius: 1.1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(254,249,195,0.10);
+            border: 1px solid var(--pastel-yellow);
+        }
+        .bibliography {
+            background: linear-gradient(90deg, var(--pastel-lavender) 80%, var(--primary) 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.1rem 1.3rem;
+            border-radius: 1.1rem;
+            box-shadow: 0 2px 12px rgba(224,231,255,0.10);
+            border: 1px solid var(--pastel-lavender);
+        }
+        /* --- STACK --- */
+        .stack-section {
+            margin-top: 2.2rem;
+            background: var(--pastel-pink);
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 24px rgba(167,139,250,0.13);
+            padding: 2.5rem 1.2rem 2.2rem 1.2rem;
+            text-align: center;
+            border: 1.5px solid var(--pastel-lavender);
+        }
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2.2rem;
+            margin-bottom: 1.2rem;
+            justify-items: center;
+        }
+        .stack-card {
+            background: var(--card);
+            border-radius: 1.7rem;
+            box-shadow: 0 4px 24px rgba(167,139,250,0.13);
+            padding: 2.2rem 0.5rem 1.5rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.1rem;
+            transition: transform 0.18s, box-shadow 0.18s;
+            border: 2.5px solid var(--pastel-lavender);
+            min-width: 170px;
+            min-height: 220px;
+            max-width: 220px;
+        }
+        .stack-card:hover {
+            transform: translateY(-10px) scale(1.07);
+            box-shadow: 0 16px 48px rgba(249,168,212,0.18);
+            border-color: var(--accent);
+        }
+        .stack-card img, .stack-icon svg {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 0.2rem;
+            filter: drop-shadow(0 2px 12px #e0e7ff88);
+        }
+        .stack-card span {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-top: 0.5rem;
+        }
+        .stack-desc {
+            color: #a78bfa;
+            font-size: 1.05rem;
+            margin-top: 0.7rem;
+        }
+        /* --- CONTACTO --- */
+        .contact-section {
+            margin-top: 2.2rem;
+            background: var(--pastel-yellow);
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 12px rgba(254,249,195,0.10);
+            padding: 2rem 1.2rem 1.5rem 1.2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1.5px solid var(--pastel-lavender);
+        }
+        .contact-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+        .contact-info {
+            text-align: center;
+            color: #a78bfa;
+            font-size: 1.08rem;
+            margin-top: 1.2rem;
+        }
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: underline;
+            transition: color 0.18s;
+        }
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary) 70%, var(--accent) 100%);
+            color: #fff;
+            padding: 0.7rem 1.7rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1rem;
+            box-shadow: 0 2px 12px rgba(124,58,237,0.10);
+            border: none;
+            transition: background 0.2s, color 0.2s, box-shadow 0.18s, transform 0.13s;
+            letter-spacing: 0.5px;
+        }
+        .cta-btn:hover {
+            background: linear-gradient(90deg, var(--accent) 70%, var(--primary) 100%);
+            color: var(--primary);
+            box-shadow: 0 8px 32px rgba(124,58,237,0.18);
+            transform: scale(1.04);
+        }
+        /* --- FOOTER --- */
+        footer {
+            margin: 2.5rem 0 1.2rem 0;
+            background: var(--glass);
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 12px rgba(167,139,250,0.06);
+            border: 1.5px solid var(--pastel-lavender);
+            padding: 0.7rem 0;
+        }
+        .footer-content {
+            max-width: 950px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            color: #a1a1aa;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 0.2rem;
+            font-weight: 500;
+            transition: color 0.18s;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            main { padding: 0.7rem; }
+            .personal-info { flex-direction: column; align-items: center; }
+            .personal-info .avatar { margin-bottom: 0.5rem; }
+            .weeks-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+            .main-header { padding: 0.7rem 0 0.3rem 0; }
+            .header-content { flex-direction: column; gap: 0.7rem; }
+            .main-nav { justify-content: center; }
+            .footer-content { flex-direction: column; gap: 0.7rem; }
+            .stack-section, .contact-section { padding: 1.1rem 0.3rem 1rem 0.3rem; }
+            .stack-card { min-width: 120px; min-height: 150px; max-width: 160px; padding: 1.1rem 0.2rem 0.8rem 0.2rem; }
+            .stack-card img, .stack-icon svg { width: 44px; height: 44px; }
+            .stack-card span { font-size: 1.01rem; }
+        }
+        @media (max-width: 600px) {
+            .main-header h1 { font-size: 1.2rem; }
+            h2 { font-size: 1.1rem; }
+            .project-card { padding: 0.7rem; }
+            main { padding: 0.2rem; }
+            section { padding: 0.7rem 0.3rem 1rem 0.3rem; }
+            .main-nav { gap: 0.2rem; padding: 0.1rem 0.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-title">
+                <span class="logo" title="Saraid Chocca">🌸</span>
+                <h1>Portafolio Profesional</h1>
+            </div>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-target="#portada">Inicio</button>
+                <button class="nav-btn" data-target="#sobremi">Sobre mí</button>
+                <button class="nav-btn" data-target="#stack">Stack</button>
+                <button class="nav-btn" data-target="#proyectos">Proyectos</button>
+                <button class="nav-btn" data-target="#cuaderno">Cuaderno</button>
+                <button class="nav-btn" data-target="#reflexion">Reflexión</button>
+                <button class="nav-btn" data-target="#bibliografia">Bibliografía</button>
+                <button class="nav-btn" data-target="#contacto">Contacto</button>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content">
+        <!-- PORTADA -->
+        <section id="portada">
+            <div class="personal-info">
+                <div class="avatar avatar-square">
+                    <img src="imagenes/sarai.jfif" alt="Saraid Chocca Aroni" class="profile-img-square">
+                </div>
+                <div class="info">
+                    <h2>CHOCCA ARONI SARAID</h2>
+                    <p>Soy estudiante de Ingeniería de Sistemas en la Universidad Nacional del Centro del Perú (UNCP).</p>
+                    <p>Motivada por la tecnología y el desarrollo web, combino creatividad, análisis y programación para transformar ideas en experiencias digitales eficientes e inspiradoras.</p>
+                    <p>📋 En este espacio documento mi aprendizaje en la asignatura "Desarrollo de Aplicaciones Web".</p>
+                    <a href="#proyectos" class="cta-btn">Ver mis proyectos 🚀</a>
+                </div>
+            </div>
+        </section>
+        <!-- SOBRE MI -->
+        <section id="sobremi">
+            <h2>Sobre Mí</h2>
+            <div class="personal-info">
+                <div class="avatar avatar-square">
+                    <img src="imagenes/Foto1.png" alt="Saraid Chocca Aroni" class="profile-img-square">
+                </div>
+                <div class="info">
+                    <h3>✨ Información Personal</h3>
+                    <ul>
+                        <li><b>Nombre:</b> CHOCCA ARONI SARAID</li>
+                        <li><b>Universidad:</b> Universidad Nacional del Centro del Perú (UNCP)</li>
+                        <li><b>Carrera:</b> Ingeniería de Sistemas</li>
+                        <li><b>Ciclo:</b> IX</li>
+                        <li><b>Email:</b> <a href="mailto:saraichocca99@gmail.com">saraichocca99@gmail.com</a></li>
+                    </ul>
+                    <h3 style="margin-top:1rem;">💫 Presentación</h3>
+                    <p>A lo largo de mi formación profesional he fortalecido competencias en análisis y creatividad aplicada, orientadas a la solución efectiva de problemáticas tecnológicas.</p>
+                    <p>Aquí presento una muestra de mi progreso académico, los logros alcanzados y el compromiso profesional con el que enfrento cada nuevo desafío en el campo del desarrollo web.</p>
+                </div>
+            </div>
+        </section>
+        <!-- STACK -->
+        <section id="stack" class="stack-section">
+            <h2>Stack de Tecnologías</h2>
+            <div class="stack-grid">
+                <div class="stack-card">
+                    <span class="stack-icon" title="HTML5">
+                        <svg width="48" height="48" viewBox="0 0 48 48"><path fill="#E44D26" d="M9 3l3.6 40.2L24 45l11.4-1.8L39 3z"/><path fill="#F16529" d="M24 41.1V6h12.6l-3.3 36.9z"/><path fill="#EBEBEB" d="M24 20.1h-5.1l-.3-3.3H24V13.5h-8.7l.1 1.2.8 9.3H24zm0 8.1h-4.2l-.3-3.3H24v-3.3h-7.2l.1 1.2.8 9.3H24z"/><path fill="#FFF" d="M24 20.1v3.3h4.8l-.5 5.4H24v3.3h7.2l.1-1.2.8-9.3H24zm0-6.6v3.3h4.5l-.3 3.3H24v3.3h7.2l.1-1.2.8-9.3H24z"/></svg>
+                    </span>
+                    <span>HTML5</span>
+                </div>
+                <div class="stack-card">
+                    <span class="stack-icon" title="CSS3">
+                        <svg width="48" height="48" viewBox="0 0 48 48"><path fill="#1572B6" d="M9 3l3.6 40.2L24 45l11.4-1.8L39 3z"/><path fill="#33A9DC" d="M24 41.1V6h12.6l-3.3 36.9z"/><path fill="#fff" d="M24 20.1h-5.1l-.3-3.3H24V13.5h-8.7l.1 1.2.8 9.3H24zm0 8.1h-4.2l-.3-3.3H24v-3.3h-7.2l.1 1.2.8 9.3H24z"/><path fill="#EBEBEB" d="M24 20.1v3.3h4.8l-.5 5.4H24v3.3h7.2l.1-1.2.8-9.3H24zm0-6.6v3.3h4.5l-.3 3.3H24v3.3h7.2l.1-1.2.8-9.3H24z"/></svg>
+                    </span>
+                    <span>CSS3</span>
+                </div>
+                <div class="stack-card">
+                    <span class="stack-icon" title="JavaScript">
+                        <svg width="48" height="48" viewBox="0 0 48 48"><rect width="48" height="48" rx="8" fill="#F7DF1E"/><path d="M31.7 36.2c.7 1.2 1.6 2.1 3.2 2.1 1.3 0 2.1-.6 2.1-1.5 0-1-0.8-1.4-2.3-2l-.8-.3c-2.3-.8-3.8-1.8-3.8-4 0-2 1.5-3.5 3.9-3.5 1.7 0 2.9.6 3.8 2.1l-2.1 1.3c-.5-.9-1-1.2-1.7-1.2-.8 0-1.3.5-1.3 1.2 0 .8.5 1.1 1.8 1.6l.8.3c2.7 1 4.2 1.9 4.2 4.2 0 2.4-1.9 3.7-4.5 3.7-2.5 0-4.1-1.2-4.9-2.7zm-10.7.2c.4.7.8 1.3 1.7 1.3.9 0 1.5-.3 1.5-1.7v-7.7h2.7v7.8c0 2.8-1.6 4-4 4-2.1 0-3.3-1.1-3.9-2.4z" fill="#22223b"/></svg>
+                    </span>
+                    <span>JavaScript</span>
+                </div>
+                <div class="stack-card">
+                    <span class="stack-icon" title="Git">
+                        <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#F05133"/><path d="M35.7 22.3l-10-10a2.1 2.1 0 0 0-3 0l-2.2 2.2 3.2 3.2a2.1 2.1 0 0 1 2.6 2.6l3.1 3.1a2.1 2.1 0 1 1-1.5 1.5l-3.1-3.1a2.1 2.1 0 0 1-2.6-2.6l-3.2-3.2-5.2 5.2a2.1 2.1 0 0 0 0 3l10 10a2.1 2.1 0 0 0 3 0l5.2-5.2a2.1 2.1 0 0 0 0-3z" fill="#fff"/></svg>
+                    </span>
+                    <span>Git</span>
+                </div>
+                <div class="stack-card">
+                    <span class="stack-icon" title="GitHub">
+                        <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#22223b"/><path d="M24 12c-6.6 0-12 5.4-12 12 0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6-.7 1.8-1 .1-.7.4-1.1.7-1.3-2.7-.3-5.5-1.3-5.5-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.8 5.4-5.5 5.7.4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 36 24c0-6.6-5.4-12-12-12z" fill="#fff"/></svg>
+                    </span>
+                    <span>GitHub</span>
+                </div>
+                <div class="stack-card">
+                    <span class="stack-icon" title="VS Code">
+                        <svg width="48" height="48" viewBox="0 0 48 48"><rect width="48" height="48" rx="8" fill="#3C99D4"/><path d="M14.7 32.6l-4.2-4.2a1.2 1.2 0 0 1 0-1.7l4.2-4.2a1.2 1.2 0 0 1 1.7 0l2.7 2.7 10.2-10.2a1.2 1.2 0 0 1 1.7 0l4.2 4.2a1.2 1.2 0 0 1 0 1.7l-4.2 4.2a1.2 1.2 0 0 1-1.7 0l-2.7-2.7-10.2 10.2a1.2 1.2 0 0 1-1.7 0z" fill="#fff"/></svg>
+                    </span>
+                    <span>VS Code</span>
+                </div>
+            </div>
+        </section>
+        <!-- PROYECTOS -->
+        <section id="proyectos">
+            <h2>Proyectos Concluidos</h2>
+            <div class="projects">
+                <div class="project-card project1">
+                    <h3>📱 Sistema de Asistencia Escolar</h3>
+                    <div class="tech">Python, Flask, MySQL, HTML, CSS</div>
+                    <div class="date">Septiembre 2024</div>
+                    <div class="desc">Sistema con detección facial e integración web para mejorar la asistencia de estudiantes.</div>
+                </div>
+                <div class="project-card project2">
+                    <h3>🛒 E-commerce Agroindustrial</h3>
+                    <div class="tech">HTML, CSS, JavaScript, PHP</div>
+                    <div class="date">Julio 2024</div>
+                    <div class="desc">Plataforma web para venta de productos agrícolas.</div>
+                </div>
+                <div class="project-card project3">
+                    <h3>🏥 Sistema Médico</h3>
+                    <div class="tech">Java, Spring Boot</div>
+                    <div class="date">Junio 2024</div>
+                    <div class="desc">Aplicación para registro y control de pacientes y citas médicas.</div>
+                </div>
+            </div>
+        </section>
+        <!-- CUADERNO SEMANAL -->
+        <section id="cuaderno">
+            <h2>Cuaderno Semanal</h2>
+            <div class="notebook" style="background: linear-gradient(90deg, #f3e8ff 60%, #fbbf24 100%); box-shadow: 0 2px 12px rgba(124,58,237,0.08);">
+                <b>Selecciona una unidad para ver las semanas correspondientes.</b>
+            </div>
+            <div class="units-tabs" style="display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 1.2rem;">
+                <a href="unidades/unidad1.html" class="unit-tab-link" style="text-decoration:none;">
+                    <button class="unit-tab big-unit-card" data-unit="1">
+                        <span style="font-size:3.2rem; display:block; margin-bottom:0.7rem;">📒</span>
+                        <span class="unit-label" style="color:#a78bfa;">Unidad 1</span>
+                        <span class="unit-range" style="color:#7c3aed;">Semanas 1-8</span>
+                    </button>
+                </a>
+                <a href="unidades/unidad2.html" class="unit-tab-link" style="text-decoration:none;">
+                    <button class="unit-tab big-unit-card" data-unit="2">
+                        <span style="font-size:3.2rem; display:block; margin-bottom:0.7rem;">📘</span>
+                        <span class="unit-label" style="color:#f472b6;">Unidad 2</span>
+                        <span class="unit-range" style="color:#be185d;">Semanas 9-16</span>
+                    </button>
+                </a>
+            </div>
+        </section>
+        <!-- REFLEXION FINAL -->
+        <section id="reflexion">
+            <h2 style="text-align:center; color:var(--accent); font-size:2.2rem; margin-bottom:1.5rem; letter-spacing:1px;">
+                <span style="vertical-align:middle; font-size:2.1rem;">🌱</span> Reflexión Final <span style="vertical-align:middle; font-size:2.1rem;">🌸</span>
+            </h2>
+            <div class="reflection" style="background: linear-gradient(120deg, #fce7f3 70%, #fef9c3 100%); border-left: 6px solid var(--accent); box-shadow: 0 4px 32px rgba(249,168,212,0.13); padding:2.2rem 2rem; font-size:1.15rem;">
+                <div style="text-align:center; margin-bottom:1.2rem;">
+                    <span style="font-size:1.5rem; color:var(--primary); font-weight:700; letter-spacing:0.5px;">Reflexión Metacognitiva</span>
+                </div>
+                <p style="margin-bottom:1.2rem;">
+                    <span style="font-size:1.3rem; vertical-align:middle;">✨</span>
+                    Esta asignatura representó una experiencia profundamente enriquecedora, permitiéndome consolidar y expandir mis conocimientos en el diseño y desarrollo de páginas web. No solo comprendí la estructura y el estilo visual, sino que también descubrí la importancia de crear experiencias funcionales, atractivas y accesibles para los usuarios.
+                </p>
+                <p style="margin-bottom:1.2rem;">
+                    <span style="font-size:1.2rem; vertical-align:middle;">🤝</span>
+                    A lo largo del proceso, fortalecí mis habilidades técnicas y colaborativas. Aprender a trabajar en equipo y utilizar herramientas profesionales como <b>GitHub</b> fue esencial para el control de versiones y la gestión eficiente de proyectos compartidos.
+                </p>
+                <div style="margin:2.2rem 0 1.2rem 0; text-align:center;">
+                    <span style="display:inline-block; background:var(--pastel-blue); color:var(--text); padding:0.5rem 1.2rem; border-radius:1.2rem; font-size:1.15rem; font-weight:600; box-shadow:0 2px 12px #bae6fd55;">¿Qué aprendí?</span>
+                </div>
+                <p style="margin-bottom:1.2rem;">
+                    <span style="font-size:1.2rem; vertical-align:middle;">💡</span>
+                    Aprendí a aplicar de manera práctica los lenguajes <b>HTML</b>, <b>CSS</b> y <b>JavaScript</b> en el desarrollo de proyectos reales, comprendiendo su integración y buenas prácticas. Además, exploré el uso de frameworks utilitarios como <b>Tailwind CSS</b> para optimizar el diseño y los fundamentos de <b>React</b> y <b>TypeScript</b>, ampliando mi perspectiva hacia el desarrollo de aplicaciones web modernas y escalables.
+                </p>
+                <p style="margin-bottom:1.2rem;">
+                    <span style="font-size:1.2rem; vertical-align:middle;">🔗</span>
+                    Este aprendizaje fue posible gracias a la combinación de teoría y práctica, donde cada nuevo reto se convirtió en una oportunidad para crecer y perfeccionar mis habilidades.
+                </p>
+                <div style="margin:2.2rem 0 1.2rem 0; text-align:center;">
+                    <span style="display:inline-block; background:var(--pastel-green); color:var(--text); padding:0.5rem 1.2rem; border-radius:1.2rem; font-size:1.15rem; font-weight:600; box-shadow:0 2px 12px #bbf7d055;">¿Cómo aprendí?</span>
+                </div>
+                <p style="margin-bottom:1.2rem;">
+                    <span style="font-size:1.2rem; vertical-align:middle;">🛠️</span>
+                    Aprendí a través de la <b>práctica constante</b>, la experimentación y la resolución de desafíos. Cada actividad reforzó mi aprendizaje mediante la creación de proyectos funcionales, el análisis de errores y la mejora continua.
+                </p>
+                <p style="margin-bottom:1.2rem;">
+                    <span style="font-size:1.2rem; vertical-align:middle;">💬</span>
+                    Compartir ideas con mis compañeros y recibir retroalimentación potenció mi capacidad de trabajo colaborativo y mi autogestión del aprendizaje.
+                </p>
+                <p style="margin-bottom:0.5rem; text-align:center; font-size:1.13rem; color:var(--primary); font-weight:600;">
+                    En resumen, este viaje académico no solo me brindó conocimientos técnicos, sino también valiosas lecciones sobre el trabajo en equipo, la perseverancia y la pasión por el aprendizaje continuo.
+                </p>
+                <div style="text-align:center; margin-top:1.5rem;">
+                    <span style="font-size:1.5rem;">🌟</span>
+                </div>
+            </div>
+        </section>
+        <!-- BIBLIOGRAFIA -->
+        <section id="bibliografia">
+            <h2 style="text-align:center; color:var(--primary); font-size:2rem; margin-bottom:1.3rem; letter-spacing:1px;">
+                <span style="vertical-align:middle; font-size:1.7rem;">📚</span> Bibliografía <span style="vertical-align:middle; font-size:1.7rem;">🔗</span>
+            </h2>
+            <div class="bibliography" style="background: linear-gradient(120deg, #e0e7ff 70%, #fce7f3 100%); border-radius:1.2rem; box-shadow:0 2px 18px #a78bfa22; padding:2rem 1.5rem;">
+                <ul style="list-style:none; padding:0; margin:0;">
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🌐</span>
+                        <div><b>MDN Web Docs.</b> <span style="color:#a78bfa;">HTML y CSS</span> <br><a href="https://developer.mozilla.org/es/" target="_blank">https://developer.mozilla.org/es/</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">📖</span>
+                        <div><b>W3Schools.</b> <span style="color:#a78bfa;">HTML Tutorial</span> <br><a href="https://www.w3schools.com/html/" target="_blank">https://www.w3schools.com/html/</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">📝</span>
+                        <div><b>DEV Community.</b> <span style="color:#a78bfa;">Advanced HTML Tags & New HTML Tags You Should Know in 2025</span> <br><a href="https://dev.to/purushoth_26/advanced-html-tags-new-html-tags-you-should-know-in-2025-1lpf" target="_blank">https://dev.to/purushoth_26/advanced-html-tags-new-html-tags-you-should-know-in-2025-1lpf</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🔤</span>
+                        <div><b>MDN Web Docs.</b> <span style="color:#a78bfa;">Advanced text features</span> <br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Advanced_text_features" target="_blank">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Advanced_text_features</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🎨</span>
+                        <div><b>LambdaTest.</b> <span style="color:#a78bfa;">Advanced CSS Tutorial: Level Up Your Web Development Skills</span> <br><a href="https://www.lambdatest.com/blog/advanced-css-tutorial/" target="_blank">https://www.lambdatest.com/blog/advanced-css-tutorial/</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">💡</span>
+                        <div><b>Microverse Blog.</b> <span style="color:#a78bfa;">10 Advanced HTML and CSS Coding Challenges</span> <br><a href="https://www.microverse.org/blog/10-advanced-html-css-coding-challenges" target="_blank">https://www.microverse.org/blog/10-advanced-html-css-coding-challenges</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🚀</span>
+                        <div><b>Medium.</b> <span style="color:#a78bfa;">Mastering Advanced Web Development: Techniques, Tools, and Best Practices</span> <br><a href="https://muhammedcuma.medium.com/mastering-advanced-web-development-techniques-tools-and-best-practices-36376a949914" target="_blank">https://muhammedcuma.medium.com/mastering-advanced-web-development-techniques-tools-and-best-practices-36376a949914</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🧩</span>
+                        <div><b>MDN Web Docs.</b> <span style="color:#a78bfa;">Advanced JavaScript objects</span> <br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects" target="_blank">https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🔲</span>
+                        <div><b>MDN Web Docs.</b> <span style="color:#a78bfa;">Grid CSS</span> <br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid" target="_blank">https://developer.mozilla.org/en-US/docs/Web/CSS/grid</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">📐</span>
+                        <div><b>MDN Web Docs.</b> <span style="color:#a78bfa;">CSS Layout</span> <br><a href="https://developer.mozilla.org/en-US/docs/Learn/web_development/CSS_layout" target="_blank">https://developer.mozilla.org/en-US/docs/Learn/web_development/CSS_layout</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🔁</span>
+                        <div><b>MDN Web Docs.</b> <span style="color:#a78bfa;">Loops and iteration — JavaScript</span> <br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration" target="_blank">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">⚙️</span>
+                        <div><b>MDN Web Docs.</b> <span style="color:#a78bfa;">JavaScript execution model</span> <br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model" target="_blank">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">⏳</span>
+                        <div><b>JavaScript Info.</b> <span style="color:#a78bfa;">Event loop: microtasks and macrotasks</span> <br><a href="https://javascript.info/event-loop" target="_blank">https://javascript.info/event-loop</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🌀</span>
+                        <div><b>Dev. Classmethod.</b> <span style="color:#a78bfa;">Understanding the Event Loop in JavaScript</span> <br><a href="https://dev.classmethod.jp/articles/understanding-the-event-loop-in-javascript/" target="_blank">https://dev.classmethod.jp/articles/understanding-the-event-loop-in-javascript/</a></div>
+                    </li>
+                    <li style="margin-bottom:1.1rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">🔍</span>
+                        <div><b>Medium.</b> <span style="color:#a78bfa;">Understanding the JavaScript Event Loop: A Closer Look into Asynchronous Execution</span> <br><a href="https://medium.com/@m.ali.ashraf.moh/understanding-the-javascript-event-loop-a-closer-look-into-asynchronous-execution-9f28728be178" target="_blank">https://medium.com/@m.ali.ashraf.moh/understanding-the-javascript-event-loop-a-closer-look-into-asynchronous-execution-9f28728be178</a></div>
+                    </li>
+                    <li style="margin-bottom:0.5rem; display:flex; align-items:flex-start; gap:0.7rem;">
+                        <span style="font-size:1.3rem;">📄</span>
+                        <div><b>ArXiv.</b> <span style="color:#a78bfa;">Loophole: Timing Attacks on Shared Event Loops in Chrome</span> <br><a href="https://arxiv.org/abs/1702.06764" target="_blank">https://arxiv.org/abs/1702.06764</a></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- CONTACTO -->
+        <section id="contacto" class="contact-section">
+            <h2 style="text-align:center; color:var(--primary); font-size:2rem; margin-bottom:1.3rem; letter-spacing:1px;">
+                <span style="vertical-align:middle; font-size:1.7rem;">📬</span> Contacto <span style="vertical-align:middle; font-size:1.7rem;">💬</span>
+            </h2>
+            <div class="contact-info" style="text-align:center; background: linear-gradient(120deg, #fef9c3 70%, #fce7f3 100%); border-radius:1.2rem; box-shadow:0 2px 18px #f9a8d422; padding:2rem 1.5rem; max-width:420px; margin:0 auto;">
+                <div style="margin-bottom:1.3rem;">
+                    <span style="font-size:1.3rem; color:var(--primary); vertical-align:middle;">✉️</span>
+                    <span style="font-size:1.13rem; color:var(--text); font-weight:600; margin-left:0.5rem;">Email:</span>
+                    <a href="mailto:saraichocca99@gmail.com" style="color:var(--accent); font-size:1.13rem; font-weight:600; text-decoration:none; margin-left:0.4rem;">saraichocca99@gmail.com</a>
+                </div>
+                <a href="https://wa.me/51924818136" target="_blank" style="display:inline-block; background:linear-gradient(90deg, #25d366 70%, #a78bfa 100%); color:#fff; padding:0.8rem 1.7rem; border-radius:2rem; font-size:1.13rem; font-weight:600; text-decoration:none; box-shadow:0 2px 12px #25d36633; margin-top:0.5rem; transition:background 0.2s, transform 0.13s; letter-spacing:0.5px;">
+                    <span style="font-size:1.3rem; vertical-align:middle; margin-right:0.5rem;">💬</span> Enviar WhatsApp: <span style="font-weight:700;">924818136</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <footer style="background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%); color: var(--text); border-top-left-radius: 2.5rem; border-top-right-radius: 2.5rem; box-shadow: 0 -6px 32px 0 rgba(167,139,250,0.10); border-top: 2.5px solid var(--pastel-lavender); margin-top:2.5rem; padding: 1.2rem 0 0.7rem 0;">
+            <div class="footer-content" style="max-width: 950px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; color: #232946; font-size: 1.08rem; letter-spacing: 0.5px;">
+                <span>© 2024 Saraid Chocca Aroni</span>
+                <span class="footer-links">
+                    <a href="#contacto" style="color: var(--accent); text-decoration: none; margin: 0 0.2rem; font-weight: 500; transition: color 0.18s;">Contacto</a>|
+                    <a href="#proyectos" style="color: var(--accent); text-decoration: none; margin: 0 0.2rem; font-weight: 500; transition: color 0.18s;">Proyectos</a>
+                </span>
+            </div>
+        </footer>
+    <script>
+    // Navegación activa y feedback para botones
+    document.addEventListener('DOMContentLoaded', () => {
+        // Navegación activa y scroll suave
+        const navBtns = document.querySelectorAll('.main-nav .nav-btn');
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                navBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const targetSelector = this.getAttribute('data-target');
+                if(targetSelector) {
+                    const target = document.querySelector(targetSelector);
+                    if(target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+        // Animación de aparición para secciones y tarjetas
+        const sections = document.querySelectorAll('main section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Animar tarjetas internas
+                    entry.target.querySelectorAll('.project-card, .stack-card').forEach(card => {
+                        card.classList.add('visible');
+                    });
+                }
+            });
+        }, { threshold: 0.18 });
+        sections.forEach(section => observer.observe(section));
+    });
+    </script>
+</body>
+</html>
+    </script>
+</body>
+</html>

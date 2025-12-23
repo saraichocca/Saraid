@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuaderno Semanal - Unidad 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+            background: linear-gradient(120deg, #f8fafc 60%, #fce7f3 100%);
+            color: #232946;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .main {
+            max-width: 900px;
+            margin: 2.5rem auto;
+            background: rgba(255,255,255,0.85);
+            border-radius: 2rem;
+            box-shadow: 0 8px 40px 0 rgba(167,139,250,0.10);
+            padding: 2.2rem 1.5rem;
+        }
+        h1 {
+            color: #a78bfa;
+            font-size: 2.1rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+        .weeks-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+            margin: 1.2rem 0 1.5rem 0;
+        }
+        .week-link {
+            background: #fff;
+            color: #a78bfa;
+            border: 1.5px solid #e0e7ff;
+            border-radius: 1.2rem;
+            padding: 0.6rem 1.3rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(167,139,250,0.07);
+            transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.13s;
+            cursor: pointer;
+            outline: none;
+        }
+        .week-link.active, .week-link:hover {
+            background: linear-gradient(90deg, #a78bfa 70%, #f9a8d4 100%);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(249,168,212,0.13);
+            border-color: #f9a8d4;
+            transform: scale(1.06);
+        }
+        #week-content {
+            display: none;
+            background: #fff;
+            border: 2px solid #f3e8ff;
+            min-height: 120px;
+            box-shadow: 0 2px 12px rgba(124,58,237,0.06);
+            border-radius: 1.1rem;
+            margin-top: 1.2rem;
+            padding: 1.2rem;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(90deg, #a78bfa 70%, #f9a8d4 100%);
+            color: #fff;
+            padding: 0.5rem 1.3rem;
+            border-radius: 1.2rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.18s, color 0.18s, transform 0.13s;
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, #f9a8d4 70%, #a78bfa 100%);
+            color: #a78bfa;
+            transform: scale(1.04);
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <a href="../index.html" class="back-btn">← Volver al Portafolio</a>
+        <h1>Cuaderno Semanal - Unidad 2<br><span style="font-size:1.1rem;font-weight:400;">Semanas 9 a 16</span></h1>
+        <div class="weeks-list">
+            <a href="#" class="week-link" data-week="9">Semana 9</a>
+            <a href="#" class="week-link" data-week="10">Semana 10</a>
+            <a href="#" class="week-link" data-week="11">Semana 11</a>
+            <a href="#" class="week-link" data-week="12">Semana 12</a>
+            <a href="#" class="week-link" data-week="13">Semana 13</a>
+            <a href="#" class="week-link" data-week="14">Semana 14</a>
+            <a href="#" class="week-link" data-week="15">Semana 15</a>
+            <a href="#" class="week-link" data-week="16">Semana 16</a>
+        </div>
+        <div id="week-content"></div>
+    </div>
+    <script>
+    const weekLinks = document.querySelectorAll('.week-link');
+    const weekContent = document.getElementById('week-content');
+    // Paleta de colores pastel únicos para cada semana (Unidad 2)
+    const weekColors = [
+        '#f87171', // Semana 9 - rojo coral
+        '#34d399', // Semana 10 - verde menta
+        '#facc15', // Semana 11 - amarillo dorado
+        '#60a5fa', // Semana 12 - azul cielo
+        '#f472b6', // Semana 13 - rosa fuerte
+        '#a3e635', // Semana 14 - verde lima
+        '#fbbf24', // Semana 15 - naranja vibrante
+        '#818cf8'  // Semana 16 - azul violeta
+    ];
+    weekLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            weekLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            const week = this.dataset.week.padStart(2,'0');
+            fetch(`../sections/cuaderno/semanas/semana${week}.html`)
+                .then(res => res.text())
+                .then(html => {
+                    weekContent.innerHTML = html;
+                    weekContent.style.display = 'block';
+                    weekContent.scrollIntoView({behavior:'smooth', block:'start'});
+                    // Color único para cada semana
+                    const color = weekColors[parseInt(week,10)-9];
+                    weekContent.style.background = color;
+                    weekContent.style.borderColor = color;
+                    weekContent.style.transition = 'background 0.5s, border-color 0.5s';
+                });
+        });
+    });
+    </script>
+</body>
+</html>
